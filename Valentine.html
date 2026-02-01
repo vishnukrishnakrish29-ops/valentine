@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #d9e8ff);
+    }
+
+    .card {
+      width: min(650px, 90vw);
+      background: #fff;
+      border-radius: 18px;
+      padding: 40px 25px 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 10px 0 30px;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: #222;
+      text-transform: lowercase;
+    }
+
+    .btn-area {
+      position: relative;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+    }
+
+    #yesBtn {
+      background: #ff3b7a;
+      color: white;
+      border: none;
+      padding: 14px 38px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(255,59,122,0.35);
+      transition: transform 0.1s ease;
+    }
+
+    #yesBtn:active { transform: scale(0.97); }
+
+    #noBtn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      color: #222;
+      font-size: 12px;
+      cursor: pointer;
+      left: 22%;
+      top: 40px;
+      padding: 4px 6px;
+    }
+
+    .small-text {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #777;
+      font-style: italic;
+    }
+
+    .result {
+      margin-top: 18px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #ff2b6d;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="icon">🐱💗</div>
+
+    <h1><span id="personName">amoocha💖</span> will you be my valentine?</h1>
+
+    <div class="btn-area" id="arena">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <div class="small-text" id="note">"No" seems a bit shy 😅</div>
+    <div class="result" id="resultText">YAY! 💖 Best Valentine ever!</div>
+  </div>
+
+  <script>
+    // Name to show
+    const name = "Amoocha💖";
+    document.getElementById("personName").textContent = name.toLowerCase();
+
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const arena = document.getElementById("arena");
+    const resultText = document.getElementById("resultText");
+    const note = document.getElementById("note");
+
+    function moveNoButton() {
+      const rect = arena.getBoundingClientRect();
+      const maxX = rect.width - noBtn.offsetWidth - 10;
+      const maxY = rect.height - noBtn.offsetHeight - 10;
+
+      const x = Math.floor(Math.random() * Math.max(1, maxX));
+      const y = Math.floor(Math.random() * Math.max(1, maxY));
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, { passive: false });
+    noBtn.addEventListener("click", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      resultText.style.display = "block";
+      note.style.display = "none";
+      yesBtn.textContent = "Yesss 💖";
+      noBtn.style.display = "none";
+    });
+  </script>
+</body>
+</html>
